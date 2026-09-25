@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#171531">
+  <meta name="description" content="中秋大团圆：接朋友回月下宴席的热闹派对游戏。">
+  <title>中秋大团圆 · 月下派对</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">☾</span><div><small>MOONLIGHT PARTY</small><strong>中秋大团圆</strong></div></div>
+      <div class="top-actions"><button id="soundBtn" class="icon-btn" aria-label="关闭音效" title="音效">♫</button><button id="pauseBtn" class="icon-btn" aria-label="暂停游戏" title="暂停" disabled>Ⅱ</button></div>
+    </header>
+
+    <section class="intro">
+      <div class="eyebrow">今夜月圆，朋友一个都不能少</div>
+      <h1>把所有朋友，<em>接回月下。</em></h1>
+      <p>穿过灯海招呼伙伴，让他们跟着你回到中央宴席。接得越多，派对越热闹！</p>
+    </section>
+
+    <section class="game-frame" aria-label="中秋大团圆游戏">
+      <div class="hud">
+        <div class="stat"><span>剩余时间</span><strong id="timeLabel">90</strong><small>秒</small></div>
+        <div class="stat"><span>团圆积分</span><strong id="scoreLabel">0</strong></div>
+        <div class="stat"><span>已到场</span><strong id="guestsLabel">0</strong></div>
+        <div class="stat combo"><span>连击</span><strong id="comboLabel">×1</strong></div>
+      </div>
+      <div class="arena-wrap"><canvas id="arena" width="960" height="600" aria-label="游戏场地：移动玉兔接朋友，并带他们回到中央宴席"></canvas>
+        <div id="toast" class="toast" role="status" aria-live="polite"></div>
+        <div id="overlay" class="overlay">
+          <div class="overlay-card">
+            <span id="overlayArt" class="overlay-art">🌕</span>
+            <div class="pill" id="overlayKicker">中秋限定 · 团圆派对</div>
+            <h2 id="overlayTitle">月亮升起来，派对开始啦！</h2>
+            <p id="overlayBody">移动玉兔碰到朋友，再带他们走进中央的月亮宴席。一次送回多位朋友可获得连击加分！</p>
+            <div id="modePicker" class="modes" role="group" aria-label="选择玩法">
+              <button class="mode selected" data-mode="classic"><b>团圆夜</b><small>90 秒 · 派对主场</small></button>
+              <button class="mode" data-mode="rush"><b>闪电局</b><small>60 秒 · 节奏更快</small></button>
+              <button class="mode" data-mode="endless"><b>不散场</b><small>接人续时 · 挑战极限</small></button>
+            </div>
+            <button id="startBtn" class="primary">开始派对 <span>↗</span></button>
+            <small id="overlayHint" class="hint">电脑：方向键 / WASD 移动，空格冲刺　·　手机：按住场地移动</small>
+          </div>
+        </div>
+      </div>
+      <div class="toolbar"><div class="mission"><span class="pulse"></span><span id="missionLabel">接朋友回到中央的月亮宴席</span></div><div class="controls"><span id="dashStatus">冲刺准备就绪</span><button id="dashBtn" class="dash-btn" disabled>⚡ 冲刺</button></div></div>
+    </section>
+
+    <section class="bottom-grid">
+      <div class="guide card"><h3>怎么玩 <span>✦</span></h3><div class="guide-steps"><div><b>01</b><span>靠近散落的朋友，组成团圆队伍</span></div><div><b>02</b><span>带队进入中央宴席，连送多人可加分</span></div><div><b>03</b><span>吃月饼加分，躲开乌云，用冲刺脱险</span></div></div></div>
+      <div class="record card"><div class="record-head"><h3>派对纪录 <span>✧</span></h3><span>仅保存在本机</span></div><div class="records"><div><small>团圆夜最高分</small><strong id="bestClassic">0</strong></div><div><small>闪电局最高分</small><strong id="bestRush">0</strong></div><div><small>不散场最高分</small><strong id="bestEndless">0</strong></div></div></div>
+    </section>
+    <footer>月色来自「中秋百景」 · 好朋友来自已有角色素材库 · 祝你今晚团圆满分 ✨</footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
