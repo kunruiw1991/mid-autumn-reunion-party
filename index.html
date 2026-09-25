@@ -1,64 +1,36 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#171531">
-  <meta name="description" content="中秋大团圆：接朋友回月下宴席的热闹派对游戏。">
-  <title>中秋大团圆 · 月下派对</title>
-  <link rel="stylesheet" href="style.css?v=ipad3">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#211836"><title>月兔派对</title><link rel="stylesheet" href="style.css?v=picture4">
 </head>
 <body>
-  <div class="stars" aria-hidden="true"></div>
-  <main class="shell">
-    <header class="topbar">
-      <div class="brand"><span class="brand-mark">☾</span><div><small>MOONLIGHT PARTY</small><strong>中秋大团圆</strong></div></div>
-      <div class="top-actions"><button id="soundBtn" class="icon-btn" aria-label="关闭音效" title="音效">♫</button><button id="pauseBtn" class="icon-btn" aria-label="暂停游戏" title="暂停" disabled>Ⅱ</button></div>
-    </header>
-
-    <section class="intro">
-      <div class="eyebrow">月亮升起来，派对开抢啦</div>
-      <h1>玉兔抢月饼，<em>一起开派对！</em></h1>
-      <p>用手指带玉兔去拿月饼！碰到金月饼会加更多分，还有惊喜月饼雨。</p>
-    </section>
-
-    <section class="game-frame" aria-label="中秋大团圆游戏">
-      <div class="hud">
-        <div class="stat"><span>倒计时</span><strong id="timeLabel">60</strong><small>秒</small></div>
-        <div class="stat"><span>你的积分</span><strong id="scoreLabel">0</strong></div>
-        <div class="stat"><span>派对名次</span><strong id="rankLabel">—</strong></div>
-        <div class="stat combo"><span>连续得分</span><strong id="comboLabel">×1</strong></div>
-      </div>
-      <div class="arena-wrap"><canvas id="arena" width="960" height="600" aria-label="月饼派对场地：用手指引导玉兔捡月饼"></canvas>
-        <button id="touchDash" class="touch-dash" aria-label="玉兔加速" disabled>⚡<small>加速</small></button>
-        <div id="toast" class="toast" role="status" aria-live="polite"></div>
-        <div id="eventBanner" class="event-banner" aria-live="polite"></div>
-        <div id="overlay" class="overlay">
-          <div class="overlay-card">
-            <span id="overlayArt" class="overlay-art">🌕</span>
-            <div class="pill" id="overlayKicker">中秋限定 · 月饼大乱斗</div>
-            <h2 id="overlayTitle">抢到最多月饼的人，今晚当主角！</h2>
-            <p id="overlayBody">用手指点一下月饼，玉兔就会跑过去。按加速按钮冲向更多月饼！</p>
-            <div id="modePicker" class="modes" role="group" aria-label="选择玩法">
-              <button class="mode selected" data-mode="party"><b>派对乱斗</b><small>60 秒 · 一起抢月饼</small></button>
-              <button class="mode" data-mode="duo"><b>键盘双人</b><small>60 秒 · 电脑键盘</small></button>
-              <button class="mode" data-mode="rush"><b>闪电狂欢</b><small>40 秒 · 惊喜更多</small></button>
-            </div>
-            <button id="startBtn" class="primary">开始派对 <span>↗</span></button>
-            <small id="overlayHint" class="hint">iPad：点月饼或在场地上拖动手指，按 ⚡ 加速</small>
-          </div>
-        </div>
-      </div>
-      <div class="toolbar"><div class="mission"><span class="pulse"></span><span id="missionLabel">点月饼移动 · 金月饼加更多分 · ⚡ 加速</span></div><div class="controls"><span id="dashStatus">加速准备就绪</span><button id="dashBtn" class="dash-btn" disabled>⚡ 玉兔加速</button></div></div>
-    </section>
-
-    <section class="bottom-grid">
-      <div class="guide card"><h3>玩耍小秘诀 <span>✦</span></h3><div class="guide-steps"><div><b>01</b><span>连续抢饼，连击最高可到 ×5</span></div><div><b>02</b><span>金月饼值 4 倍分；按 ⚡ 跑得更快</span></div><div><b>03</b><span>留意月饼雨和双倍分等惊喜</span></div></div></div>
-      <div class="record card"><div class="record-head"><h3>派对排行榜 <span>✧</span></h3><span id="recordHint">最高分保存在本机</span></div><div id="leaderboard" class="leaderboard">开局后见分晓</div><div class="records"><div><small>派对最高</small><strong id="bestParty">0</strong></div><div><small>双人最高</small><strong id="bestDuo">0</strong></div><div><small>闪电最高</small><strong id="bestRush">0</strong></div></div></div>
-    </section>
-    <section class="music-panel card" aria-label="派对音乐"><div><h3>🎵 派对音乐</h3><p>想边玩边听《KPop Demon Hunters》？打开官方原声，或选择 iPad 上已有的音频文件。选择的文件只在这台设备播放。</p></div><div class="music-actions"><a href="https://open.spotify.com/album/50O9cXkFsQs8z0RV0UOvvl" target="_blank" rel="noopener noreferrer">打开官方原声 ↗</a><label class="music-file">选择本机歌曲<input id="musicFile" type="file" accept="audio/*"></label><button id="musicToggle" type="button" disabled>播放 / 暂停</button></div><div id="musicStatus" class="music-status" role="status">还没有选择歌曲</div><audio id="musicPlayer" loop preload="none"></audio></section>
-    <footer>月色来自「中秋百景」 · 好朋友来自已有角色素材库 · 祝你今晚团圆满分 ✨</footer>
-  </main>
-  <script src="game.js?v=ipad3"></script>
-</body>
-</html>
+<main class="game-frame" aria-label="月兔派对">
+<header class="topbar">
+<span class="moon" aria-hidden="true">🌕</span>
+<div class="score" aria-label="月饼积分">🥮 <strong id="scoreLabel">0</strong></div>
+<div class="clock" aria-label="剩余时间">⏳ <strong id="timeLabel">60</strong></div>
+<div class="top-actions">
+<button id="musicNext" aria-label="换一首歌">⏭</button>
+<button id="soundBtn" aria-label="关闭声音">🔊</button>
+<button id="pauseBtn" aria-label="暂停" disabled>⏸</button>
+</div>
+</header>
+<section class="arena-wrap" aria-label="游戏场地">
+<canvas id="arena" width="960" height="600" aria-label="点月饼或拖动手指，让玉兔去收集月饼"></canvas>
+<button id="touchDash" class="touch-dash" aria-label="加速" disabled>⚡</button>
+<div id="toast" class="toast" role="status"></div>
+<div id="eventBanner" class="event-banner"></div>
+<div id="overlay" class="overlay">
+<div class="overlay-card">
+<div class="friends" aria-hidden="true"><img src="assets/guests/critter_05_dogday.webp" alt=""><span id="overlayArt">🐰</span><img src="assets/guests/mikey.webp" alt=""></div>
+<div id="winStars" class="win-stars" hidden>⭐ ⭐ ⭐</div>
+<button id="startBtn" class="play-button" aria-label="开始游戏">▶</button>
+<div id="gestureDemo" class="gesture-demo" aria-hidden="true"><span>👆</span><span>🥮</span><span>✨</span></div>
+</div>
+</div>
+</section>
+<audio id="musicPlayer" preload="none" playsinline></audio>
+<div hidden aria-hidden="true"><span id="overlayKicker"></span><span id="overlayTitle"></span><span id="overlayBody"></span><span id="overlayHint"></span><div id="modePicker"></div><span id="rankLabel"></span><span id="comboLabel"></span><div id="leaderboard"></div><button id="dashBtn"></button><span id="dashStatus"></span><span id="missionLabel"></span><span id="bestParty"></span><span id="bestDuo"></span><span id="bestRush"></span></div>
+</main>
+<script src="game.js?v=picture4"></script>
+</body></html>
