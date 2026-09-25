@@ -18,18 +18,19 @@
 
     <section class="intro">
       <div class="eyebrow">月亮升起来，派对开抢啦</div>
-      <h1>抢月饼，<em>赢下团圆夜！</em></h1>
-      <p>和朋友们同场乱斗。抢金月饼、冲刺夺分、追上随机派对事件，冲上排行榜第一！</p>
+      <h1>玉兔抢月饼，<em>一起开派对！</em></h1>
+      <p>用手指带玉兔去拿月饼！碰到金月饼会加更多分，还有惊喜月饼雨。</p>
     </section>
 
     <section class="game-frame" aria-label="中秋大团圆游戏">
       <div class="hud">
         <div class="stat"><span>倒计时</span><strong id="timeLabel">75</strong><small>秒</small></div>
         <div class="stat"><span>你的积分</span><strong id="scoreLabel">0</strong></div>
-        <div class="stat"><span>当前名次</span><strong id="rankLabel">—</strong></div>
-        <div class="stat combo"><span>抢饼连击</span><strong id="comboLabel">×1</strong></div>
+        <div class="stat"><span>派对名次</span><strong id="rankLabel">—</strong></div>
+        <div class="stat combo"><span>连续得分</span><strong id="comboLabel">×1</strong></div>
       </div>
-      <div class="arena-wrap"><canvas id="arena" width="960" height="600" aria-label="月饼乱斗场地：移动角色抢月饼，冲刺可夺走对手积分"></canvas>
+      <div class="arena-wrap"><canvas id="arena" width="960" height="600" aria-label="月饼派对场地：用手指引导玉兔捡月饼"></canvas>
+        <button id="touchDash" class="touch-dash" aria-label="玉兔加速" disabled>⚡<small>加速</small></button>
         <div id="toast" class="toast" role="status" aria-live="polite"></div>
         <div id="eventBanner" class="event-banner" aria-live="polite"></div>
         <div id="overlay" class="overlay">
@@ -37,24 +38,25 @@
             <span id="overlayArt" class="overlay-art">🌕</span>
             <div class="pill" id="overlayKicker">中秋限定 · 月饼大乱斗</div>
             <h2 id="overlayTitle">抢到最多月饼的人，今晚当主角！</h2>
-            <p id="overlayBody">移动玉兔抢月饼，连续拾取翻倍得分。冲刺撞到对手还能夺分；金月饼和派对事件让局势随时逆转！</p>
+            <p id="overlayBody">用手指点一下月饼，玉兔就会跑过去。按加速按钮冲向更多月饼！</p>
             <div id="modePicker" class="modes" role="group" aria-label="选择玩法">
-              <button class="mode selected" data-mode="party"><b>派对乱斗</b><small>75 秒 · 对战 3 位朋友</small></button>
-              <button class="mode" data-mode="duo"><b>双人同屏</b><small>75 秒 · 键盘对决</small></button>
-              <button class="mode" data-mode="rush"><b>闪电狂欢</b><small>50 秒 · 事件更频繁</small></button>
+              <button class="mode selected" data-mode="party"><b>派对乱斗</b><small>60 秒 · 一起抢月饼</small></button>
+              <button class="mode" data-mode="duo"><b>键盘双人</b><small>60 秒 · 电脑键盘</small></button>
+              <button class="mode" data-mode="rush"><b>闪电狂欢</b><small>40 秒 · 惊喜更多</small></button>
             </div>
             <button id="startBtn" class="primary">开始派对 <span>↗</span></button>
-            <small id="overlayHint" class="hint">单人：WASD / 方向键移动，空格冲刺 · 手机：点按场地移动</small>
+            <small id="overlayHint" class="hint">iPad：点月饼或在场地上拖动手指，按 ⚡ 加速</small>
           </div>
         </div>
       </div>
-      <div class="toolbar"><div class="mission"><span class="pulse"></span><span id="missionLabel">抢月饼连击 · 金月饼高分 · 冲刺碰对手夺分</span></div><div class="controls"><span id="dashStatus">冲刺准备就绪</span><button id="dashBtn" class="dash-btn" disabled>⚡ 冲刺夺分</button></div></div>
+      <div class="toolbar"><div class="mission"><span class="pulse"></span><span id="missionLabel">点月饼移动 · 金月饼加更多分 · ⚡ 加速</span></div><div class="controls"><span id="dashStatus">冲刺准备就绪</span><button id="dashBtn" class="dash-btn" disabled>⚡ 玉兔加速</button></div></div>
     </section>
 
     <section class="bottom-grid">
-      <div class="guide card"><h3>抢分秘诀 <span>✦</span></h3><div class="guide-steps"><div><b>01</b><span>连续抢饼，连击最高可到 ×5</span></div><div><b>02</b><span>金月饼值 4 倍分；冲刺碰对手可夺分</span></div><div><b>03</b><span>留意流星雨和双倍分等派对事件</span></div></div></div>
-      <div class="record card"><div class="record-head"><h3>实时排行榜 <span>✧</span></h3><span id="recordHint">最高分保存在本机</span></div><div id="leaderboard" class="leaderboard">开局后见分晓</div><div class="records"><div><small>派对最高</small><strong id="bestParty">0</strong></div><div><small>双人最高</small><strong id="bestDuo">0</strong></div><div><small>闪电最高</small><strong id="bestRush">0</strong></div></div></div>
+      <div class="guide card"><h3>玩耍小秘诀 <span>✦</span></h3><div class="guide-steps"><div><b>01</b><span>连续抢饼，连击最高可到 ×5</span></div><div><b>02</b><span>金月饼值 4 倍分；按 ⚡ 跑得更快</span></div><div><b>03</b><span>留意月饼雨和双倍分等惊喜</span></div></div></div>
+      <div class="record card"><div class="record-head"><h3>派对排行榜 <span>✧</span></h3><span id="recordHint">最高分保存在本机</span></div><div id="leaderboard" class="leaderboard">开局后见分晓</div><div class="records"><div><small>派对最高</small><strong id="bestParty">0</strong></div><div><small>双人最高</small><strong id="bestDuo">0</strong></div><div><small>闪电最高</small><strong id="bestRush">0</strong></div></div></div>
     </section>
+    <section class="music-panel card" aria-label="派对音乐"><div><h3>🎵 派对音乐</h3><p>想边玩边听《KPop Demon Hunters》？打开官方原声，或选择 iPad 上已有的音频文件。选择的文件只在这台设备播放。</p></div><div class="music-actions"><a href="https://open.spotify.com/album/50O9cXkFsQs8z0RV0UOvvl" target="_blank" rel="noopener noreferrer">打开官方原声 ↗</a><label class="music-file">选择本机歌曲<input id="musicFile" type="file" accept="audio/*"></label><button id="musicToggle" type="button" disabled>播放 / 暂停</button></div><div id="musicStatus" class="music-status" role="status">还没有选择歌曲</div><audio id="musicPlayer" loop preload="none"></audio></section>
     <footer>月色来自「中秋百景」 · 好朋友来自已有角色素材库 · 祝你今晚团圆满分 ✨</footer>
   </main>
   <script src="game.js"></script>
