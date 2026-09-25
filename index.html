@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#171531">
   <meta name="description" content="中秋大团圆：接朋友回月下宴席的热闹派对游戏。">
   <title>中秋大团圆 · 月下派对</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=ipad3">
 </head>
 <body>
   <div class="stars" aria-hidden="true"></div>
@@ -24,7 +24,7 @@
 
     <section class="game-frame" aria-label="中秋大团圆游戏">
       <div class="hud">
-        <div class="stat"><span>倒计时</span><strong id="timeLabel">75</strong><small>秒</small></div>
+        <div class="stat"><span>倒计时</span><strong id="timeLabel">60</strong><small>秒</small></div>
         <div class="stat"><span>你的积分</span><strong id="scoreLabel">0</strong></div>
         <div class="stat"><span>派对名次</span><strong id="rankLabel">—</strong></div>
         <div class="stat combo"><span>连续得分</span><strong id="comboLabel">×1</strong></div>
@@ -49,7 +49,7 @@
           </div>
         </div>
       </div>
-      <div class="toolbar"><div class="mission"><span class="pulse"></span><span id="missionLabel">点月饼移动 · 金月饼加更多分 · ⚡ 加速</span></div><div class="controls"><span id="dashStatus">冲刺准备就绪</span><button id="dashBtn" class="dash-btn" disabled>⚡ 玉兔加速</button></div></div>
+      <div class="toolbar"><div class="mission"><span class="pulse"></span><span id="missionLabel">点月饼移动 · 金月饼加更多分 · ⚡ 加速</span></div><div class="controls"><span id="dashStatus">加速准备就绪</span><button id="dashBtn" class="dash-btn" disabled>⚡ 玉兔加速</button></div></div>
     </section>
 
     <section class="bottom-grid">
@@ -59,6 +59,6 @@
     <section class="music-panel card" aria-label="派对音乐"><div><h3>🎵 派对音乐</h3><p>想边玩边听《KPop Demon Hunters》？打开官方原声，或选择 iPad 上已有的音频文件。选择的文件只在这台设备播放。</p></div><div class="music-actions"><a href="https://open.spotify.com/album/50O9cXkFsQs8z0RV0UOvvl" target="_blank" rel="noopener noreferrer">打开官方原声 ↗</a><label class="music-file">选择本机歌曲<input id="musicFile" type="file" accept="audio/*"></label><button id="musicToggle" type="button" disabled>播放 / 暂停</button></div><div id="musicStatus" class="music-status" role="status">还没有选择歌曲</div><audio id="musicPlayer" loop preload="none"></audio></section>
     <footer>月色来自「中秋百景」 · 好朋友来自已有角色素材库 · 祝你今晚团圆满分 ✨</footer>
   </main>
-  <script src="game.js"></script>
+  <script src="game.js?v=ipad3"></script>
 </body>
 </html>
