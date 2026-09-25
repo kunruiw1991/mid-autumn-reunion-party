@@ -1,26 +1,26 @@
-# 中秋大团圆 · 月下派对
+# 中秋大团圆 · 月饼大乱斗
 
-一款无需安装的中秋浏览器小游戏。[点击开始游戏](https://kunruiw1991.github.io/mid-autumn-reunion-party/)。手机和电脑都可以玩。
+[立即在线玩](https://kunruiw1991.github.io/mid-autumn-reunion-party/) · 无需安装，手机和电脑都可以玩。
 
 ## 玩法
 
-1. 移动玉兔，靠近散落在场地里的朋友；朋友会排队跟着你。
-2. 带队进入中央月亮宴席。一次带回越多人，得分倍数越高；Mikey 和 JJ 是加分贵宾。
-3. 吃月饼得分，躲开移动的乌云。被乌云碰到会少 2 秒，也可能有朋友走散。
-4. 每带回 5 位朋友，派对奖励 3 秒。空格或「冲刺」按钮可以穿过乌云。
+抢月饼，和其他朋友比积分。连续拾取会把得分倍数叠到 **×5**，金月饼价值 **4 倍**；冲刺撞到对手可以夺走积分。每隔十几秒就会触发流星月饼雨、全场双倍分、灯笼加速、金月饼大爆发等随机事件。倒计时结束按积分排名，最高分保存在本机。
 
-有 **90 秒团圆夜**、**60 秒闪电局**、**接人续时的不散场** 三种模式。每种模式的最高分存在浏览器本机。
+- **派对乱斗**：75 秒，和 3 位电脑朋友抢第一。
+- **双人同屏**：75 秒，两名玩家与 2 位电脑朋友同场对决。
+- **闪电狂欢**：50 秒，派对事件触发得更频繁。
 
-**电脑操作：** 方向键或 WASD 移动，空格冲刺，P 暂停。  
-**手机操作：** 按住游戏场地引导玉兔移动，点击「冲刺」按钮。
+**单人电脑：** WASD 或方向键移动，空格冲刺，P 暂停。  
+**双人电脑：** 1P 用 WASD + 空格；2P 用方向键 + 右 Shift。  
+**手机：** 点按场地让玉兔前往目标，按住并拖动可持续引导；点击「冲刺夺分」。
 
 ## 素材来源
 
-- 场景：[`mid-autumn-legend-assets`](https://github.com/kunruiw1991/mid-autumn-legend-assets) 中的 4 幅原创 SVG。
-- 12 位角色头像：[`critters-calabash-brothers`](https://github.com/kunruiw1991/critters-calabash-brothers) 的角色图，针对游戏缩小为 WebP。
-- Mikey、JJ：[`mikey-jj-assets`](https://github.com/kunruiw1991/mikey-jj-assets) 的角色图，针对游戏缩小为 WebP。
+- 场景：[`mid-autumn-legend-assets`](https://github.com/kunruiw1991/mid-autumn-legend-assets) 的中秋 SVG。
+- 12 位角色头像：[`critters-calabash-brothers`](https://github.com/kunruiw1991/critters-calabash-brothers) 的角色图，在游戏里缩小为 WebP。
+- Mikey、JJ：[`mikey-jj-assets`](https://github.com/kunruiw1991/mikey-jj-assets) 的角色图，在游戏里缩小为 WebP。
 
-角色和相关形象的权利归各自权利人所有；本仓库不宣称这些角色图为原创，也不为它们另行授予许可证。游戏代码与中秋场景设计由本项目制作。
+角色与相关形象的权利归各自权利人所有；本仓库不宣称这些角色图为原创，也不为它们另行授予许可证。游戏代码与中秋场景设计由本项目制作。
 
 ## 本地运行
 
