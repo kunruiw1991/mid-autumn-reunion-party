@@ -25,10 +25,33 @@
   function refreshBest(){for(const [m,id] of [['party','bestParty'],['duo','bestDuo'],['rush','bestRush']])$(id).textContent=best(m).toLocaleString()}
   function saveBest(m,n){if(n<=best(m))return false;try{localStorage.setItem(`reunion-v2-${m}`,String(n))}catch(_){}return true}
   function starterCakes(){return Array.from({length:6},(_,i)=>{const angle=i*Math.PI/3;return {...cake(0),x:480+Math.cos(angle)*110,y:300+Math.sin(angle)*110,type:i===0?'gold':'cake'}})}
-  function start(){playMusic();$('winStars').hidden=true;$('gestureDemo').hidden=false;const cfg=modes[mode];const player=actor('你 · 玉兔',-1,480,300);const actors=[player];if(mode==='duo')actors.push(actor('2P · JJ',13,545,300,false,true));const botIds=mode==='duo'?[4,12]:[4,12,13];for(let i=0;i<cfg.bots;i++)actors.push(actor(names[botIds[i]],botIds[i],145+i*310,100+i*190,true));game={mode,actors,player,cakes:[...starterCakes(),...Array.from({length:12},()=>cake())],clouds:[cloud(),cloud()],particles:[],floaters:[],time:cfg.time,elapsed:0,spawnClock:0,eventClock:cfg.interval,event:null,eventTime:0,paused:false,playing:true,shake:0};keys.clear();pointer.enabled=false;last=performance.now();ui.overlay.classList.add('hidden');ui.pause.disabled=false;ui.dash.disabled=false;ui.touchDash.disabled=false;ui.pause.textContent='⏸';ui.mission.textContent=mode==='duo'?'1P WASD + 空格 · 2P 方向键 + 右 Shift':'点月饼移动 · 金月饼 4 倍分 · ⚡ 加速';ui.event.classList.remove('show');fanfare();updateHud()}
+  function start(){playMusic();$('results').hidden=true;$('results').replaceChildren();$('introFriends').hidden=false;$('winStars').hidden=true;$('gestureDemo').hidden=false;const cfg=modes[mode];const player=actor('你 · 玉兔',-1,480,300);const actors=[player];if(mode==='duo')actors.push(actor('2P · JJ',13,545,300,false,true));const botIds=mode==='duo'?[4,12]:[4,12,13];for(let i=0;i<cfg.bots;i++)actors.push(actor(names[botIds[i]],botIds[i],145+i*310,100+i*190,true));game={mode,actors,player,cakes:[...starterCakes(),...Array.from({length:12},()=>cake())],clouds:[cloud(),cloud()],particles:[],floaters:[],time:cfg.time,elapsed:0,spawnClock:0,eventClock:cfg.interval,event:null,eventTime:0,paused:false,playing:true,shake:0};keys.clear();pointer.enabled=false;last=performance.now();ui.overlay.classList.add('hidden');ui.pause.disabled=false;ui.dash.disabled=false;ui.touchDash.disabled=false;ui.pause.textContent='⏸';ui.mission.textContent=mode==='duo'?'1P WASD + 空格 · 2P 方向键 + 右 Shift':'点月饼移动 · 金月饼 4 倍分 · ⚡ 加速';ui.event.classList.remove('show');fanfare();updateHud()}
   function showOverlay(icon,title,body,button,kicker){ui.art.textContent=icon;ui.start.textContent=game?.playing?'▶':'↻';ui.start.setAttribute('aria-label',game?.playing?'继续游戏':'再玩一次');ui.overlay.classList.remove('hidden')}
   function pause(){if(!game?.playing)return;game.paused=!game.paused;ui.pause.textContent=game.paused?'▶':'⏸';ui.pause.setAttribute('aria-label',game.paused?'继续游戏':'暂停');if(game.paused)music.pause();else playMusic();if(game.paused){showOverlay('⏸','派对暂停','月饼还在，朋友们等着你回来。','继续派对','暂停中');ui.modes.hidden=true;ui.hint.textContent='按 P 或右上角按钮继续'}else{ui.overlay.classList.add('hidden');last=performance.now()}}
-  function finish(){const g=game;if(!g?.playing)return;g.playing=false;$('winStars').hidden=false;$('gestureDemo').hidden=true;ui.time.textContent='0';ui.pause.disabled=true;ui.dash.disabled=true;ui.touchDash.disabled=true;ui.event.classList.remove('show');const standings=[...g.actors].sort((a,b)=>b.score-a.score);const rank=standings.indexOf(g.player)+1;const record=saveBest(g.mode,g.player.score);refreshBest();burst(g.player.x,g.player.y,70);fanfare();const winner=standings[0];const phrase=rank===1?'你是今晚的月饼王！':`今晚冠军：${winner.name}`;showOverlay('🏆',phrase,`你的积分 ${g.player.score.toLocaleString()} · 第 ${rank} 名${record?' · 打破本机纪录！':''}。再来一局，试试多拿金月饼。`,'再开一局',`${modes[g.mode].name} · 最终排名`);ui.modes.hidden=false;ui.hint.textContent='选一个模式，再战一次！'}
+  function renderResults(actors){
+    const sorted=[...actors].sort((a,b)=>b.score-a.score);
+    const top=sorted[0].score;
+    const panel=$('results');panel.replaceChildren();
+    for(const a of sorted){
+      const winner=top>0&&a.score===top;
+      const card=document.createElement('div');card.className='result-card'+(winner?' winner':'')+(!a.bot?' player':'');
+      card.setAttribute('aria-label',`${a.name}: ${a.score}${winner?'，第一名':''}`);
+      const crown=document.createElement('span');crown.className='result-crown';crown.textContent=winner?'👑':'';card.append(crown);
+      if(a.id<0){const rabbit=document.createElement('span');rabbit.className='result-rabbit';rabbit.textContent='🐰';card.append(rabbit)}
+      else{const portrait=document.createElement('img');portrait.src=`assets/guests/${files[a.id]}.webp`;portrait.alt=a.name;card.append(portrait)}
+      const score=document.createElement('strong');score.textContent=a.score.toLocaleString();card.append(score);
+      panel.append(card);
+    }
+    $('introFriends').hidden=true;$('winStars').hidden=true;panel.hidden=false;
+  }
+  function finish(){
+    const g=game;if(!g?.playing)return;
+    g.playing=false;g.time=0;updateHud();
+    $('gestureDemo').hidden=true;ui.pause.disabled=true;ui.dash.disabled=true;ui.touchDash.disabled=true;ui.event.classList.remove('show');
+    saveBest(g.mode,g.player.score);refreshBest();fanfare();
+    showOverlay('','','','','');renderResults(g.actors);
+    ui.modes.hidden=true;
+  }
   function dash(a){if(!game?.playing||game.paused||a.cool>0)return;a.dash=.3;a.cool=a.second?4.5:3.5;a.hit.clear();if(!a.bot){beep(640,.2,'sawtooth',.045);burst(a.x,a.y,14)}}
   function startEvent(){const g=game;const options=events.filter(e=>e.id!==g.event?.id);const next=options[Math.floor(Math.random()*options.length)];g.event=next;g.eventTime=next.duration;g.eventClock=modes[g.mode].interval;ui.event.textContent=next.id==='double'?'🥮 ×2':next.id==='speed'?'🏮 ⚡':next.id==='gold'?'⭐ 🥮 ⭐':'🌠 🥮 🥮';ui.event.classList.add('show');say(`${next.icon} ${next.name}！`);fanfare();burst(W/2,70,34);if(next.id==='rain')for(let i=0;i<25;i++)g.cakes.push(cake(.27));if(next.id==='gold')for(let i=0;i<13;i++)g.cakes.push(cake(.85));if(next.id==='speed')for(const a of g.actors)a.cool=Math.max(0,a.cool-1)}
   function award(a,c){const g=game;const n=c.type==='gold'?40:10;if(a.comboTime>0)a.combo=Math.min(a.bot?1:5,a.combo+1);else a.combo=1;a.comboTime=a.bot?1.7:5;if(a.bot)a.pickupCooldown=1.8;const mult=(g.event?.id==='double'&&g.eventTime>0?2:1);const points=n*a.combo*mult;a.score+=points;if(!a.bot){floatText(c.x,c.y,`+${points}${a.combo>=3?' ✨':''}`,c.type==='gold'?'#ffe07c':'#fff0d3');beep(c.type==='gold'?880:570+a.combo*65,.11,'triangle');burst(c.x,c.y,c.type==='gold'?16:7);if(a.combo===5)say('🔥 五连击！保持节奏')}else if(a.second){floatText(c.x,c.y,`2P +${points}`,'#aeead7');beep(510,.08)}else if(c.type==='gold'){floatText(c.x,c.y,`+${points}`,'#f7bfd2')}}
